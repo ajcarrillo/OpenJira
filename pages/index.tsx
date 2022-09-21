@@ -1,9 +1,12 @@
 import { Typography } from '@mui/material'
 import type { NextPage } from 'next'
+import { Layout } from '../components/layouts'
 
 const Home: NextPage = () => {
   return (
-    <Typography variant="h1">Open jira</Typography>
+    <Layout>
+      <Typography variant="h1">Open jira</Typography>
+    </Layout>
   )
 }
 
