@@ -18,6 +18,10 @@ export default function handler(
   switch (req.method) {
     case "PUT":
       return updateEntry(req, res, id)
+    case "GET":
+      return getEntry(res, id)
+    default:
+      res.status(405).json({ message: "Method not allowed" })
   }
 
   res.status(200).json({ message: "John Doe" })
@@ -61,4 +65,19 @@ const updateEntry = async (
 
     return res.status(500).json({ message: "Something went wrong, check logs" })
   }
+}
+
+const getEntry = async (res: NextApiResponse<Data>, id: string) => {
+  await db.connectToDatabase()
+
+  const entry = await Entry.findById(id)
+
+  if (!entry) {
+    await db.disconnect()
+    return res.status(404).json({ message: "Entry not found" })
+  }
+
+  await db.disconnect()
+
+  return res.status(200).json(entry)
 }
