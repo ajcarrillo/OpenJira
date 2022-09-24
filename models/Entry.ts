@@ -14,6 +14,7 @@ const schema = new Schema({
       values: ["pending", "in-progress", "finished"],
       message: "{VALUE} no es un estado válido}",
     },
+    default: "pending",
   },
 })
 
